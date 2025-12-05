@@ -1,0 +1,44 @@
+---
+strategy: static
+no_screen_padding: 'no'
+dark_mode: 'no'
+static_data: ''
+polling_verb: get
+polling_url: ''
+polling_headers: ''
+polling_body: ''
+id: 190574
+custom_fields:
+- name: About this plugin
+  keyname: author_bio
+  field_type: author_bio
+  description: Get the feeling of a 80's/90's digital clock, enter your location (optional), select your time format and what theme you would want. And you get a clock that is not even on time, everytime. <br><br> Questions or ideas? Email me or reach out on Discord at @Bas/@Bastronautica.
+  email_address: trmnl@achtnegen.nl
+- keyname: location
+  name: Location
+  field_type: string
+  default: ''
+  help_text: Enter your location name (e.g., "Amsterdam", "New York")
+- keyname: time_format
+  name: Time Format
+  field_type: select
+  default: 24h
+  options:
+  - 24-hour: 24h
+  - 12-hour (AM/PM): 12h
+- keyname: date_format
+  name: Date Format
+  field_type: select
+  default: us
+  options:
+  - DD MMM YYYY: eu
+  - MMM DD, YYYY: us
+- keyname: color_mode
+  name: Color Mode
+  field_type: select
+  default: dark
+  options:
+  - Dark: dark
+  - Light: light
+name: Digital Clock
+refresh_interval: 15

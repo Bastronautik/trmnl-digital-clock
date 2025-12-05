@@ -1,0 +1,79 @@
+<div class="layout layout--col gap--large rounded {{ color_mode }}
+  {% if color_mode == 'light' %}
+  text--black
+  {% else %}
+  text--white bg--black
+  {% endif %}
+  ">
+
+  <div class="date-display flex gap--xsmall flex--center-x">
+    {% comment %} Convert date_string to lowercase and split into characters {% endcomment %}
+    {% assign date_string_lower = date_string | downcase %}
+    {% assign date_chars = date_string_lower | split: "" %}
+    {% for char in date_chars %}
+    <div class="date-char" data-char="{{ char }}"></div>
+    {% endfor %}
+  </div>
+
+  <div class="time-display flex gap--xsmall flex--center-x">
+    <div class="time-digit" data-char="{{ hours | slice: 0, 1 }}"></div>
+    <div class="time-digit" data-char="{{ hours | slice: 1, 1 }}"></div>
+    <!-- Colon -->
+    <div class="colon flex flex--col flex--center-y gap--large">
+      <div class="colon-dot w--2 h--2 mx--2 rounded
+        {% if color_mode == 'light' %}
+        bg--black
+        {% else %}
+        bg--white
+        {% endif %}
+        "></div>
+      <div class="colon-dot w--2 h--2 mx--2 rounded
+        {% if color_mode == 'light' %}
+        bg--black
+        {% else %}
+        bg--white
+        {% endif %}
+        "></div>
+    </div>
+    <!-- End colon -->
+    <div class="time-digit" data-char="{{ minutes | slice: 0, 1 }}"></div>
+    <div class="time-digit" data-char="{{ minutes | slice: 1, 1 }}"></div>
+
+    {% if time_format == "12h" %}
+    <div class="am-pm-display flex  gap--xsmall ml--2">
+      {% assign am_pm_chars = am_pm | split: "" %}
+      {% for char in am_pm_chars %}
+      <div class="am-pm-char" data-char="{{ char }}"></div>
+      {% endfor %}
+    </div>
+    {% endif %}
+  </div>
+
+  {% if location != "" %}
+  {% assign location_lower = location | downcase %}
+  {% assign location_chars = location_lower | split: "" %}
+  <div class="flex gap--xsmall">
+    {% for char in location_chars %}
+    <div class="date-char" data-char="{{ char }}"></div>
+    {% endfor %}
+  </div>
+  {% endif %}
+
+</div>
+
+<script>
+  document.querySelectorAll('.time-digit').forEach(el => {
+    const char = el.getAttribute('data-char');
+    el.innerHTML = renderDigit(char, 50);
+  });
+
+  document.querySelectorAll('.date-char').forEach(el => {
+    const char = el.getAttribute('data-char');
+    el.innerHTML = renderDigit(char, 20);
+  });
+
+  document.querySelectorAll('.am-pm-char').forEach(el => {
+    const char = el.getAttribute('data-char');
+    el.innerHTML = renderDigit(char, 12);
+  });
+</script>
